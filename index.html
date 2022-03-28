@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Arduino Nodejs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar-dark">
+        <a class="" href="#">Receptor</a>
+    </nav>
+    <div class="container">
+
+    </div>
+
+    <div class="container" style="background:#2c0170;"></div>
+    <div class="container" style="background:rgb(44, 1, 112);"></div>
+    <div class="container" style="background:rgba(0, 26, 255, 0.432);"></div>
+    <div class="row">
+        <div class="col" id="listaHS">
+            <h3>Humedad del suelo</h3><br>
+        </div>
+        <div class="col" id="listaH">
+            <h3>Humedad relativa</h3><br>
+        </div>
+        <div class="col" id="listaT">
+            <h3>Temperatura</h3><br>
+        </div>
+    </div>
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        const socket = io();
+        var sep = [];
+        socket.on('arduino:data',
+            data => {
+
+
+                console.log(data);
+                sep = data.value.split(' ');
+                if (sep[0] == "T") {
+                    document.getElementById("listaT").innerHTML += "<div style=\"font-size:100%; background:rgb(0," + Math.round(sep[1] * sep[1] + 20) + ",255); \" >" + sep[1] + "°C </div>";
+
+                    document.getElementById("listaT").innerHTML += "<br>";
+                    console.log(data);
+                }
+                if (sep[0] == "HR") {
+                    document.getElementById("listaH").innerHTML += "<div style=\"font-size:100%; background:rgb(255, " + Math.round(sep[1] * sep[1] * 2 + 20) + ",0); \" >" + sep[1] + "</div>";
+                    document.getElementById("listaH").innerHTML += "<br>";
+                    console.log(data);
+                }
+                if (sep[0] == "HS") {
+
+                    document.getElementById("listaHS").innerHTML += "<div style=\"font-size:100%;  background:rgb(255, " + Math.round((sep[1] / 102.3) * (sep[1] / 102.3) + 20) + ",0); \" >" + Math.round(sep[1] / 102.3) + "</div>";
+
+                    document.getElementById("listaHS").innerHTML += "<br>";
+                    console.log(data);
+                }
+
+            });
+    </script>
+
+</body>
+
+</html>
