@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.get('/sensor/:id', (req, res) => {
 
     const articleId = req.params.id;
-    console.log(articleId);
+    // console.log(articleId);
     io.emit('arduino:data', {
         value: articleId
     });

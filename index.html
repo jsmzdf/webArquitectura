@@ -46,25 +46,28 @@
             data => {
 
 
-                console.log(data);
+                //console.log(data);
                 sep = data.value.split(' ');
                 if (sep[0] == "T") {
-                    document.getElementById("listaT").innerHTML += "<div style=\"font-size:100%; background:rgb(0," + Math.round((sep[1] - 22) * sep[1] + 30) + ",255); \" >" + sep[1] + "°C </div>";
+
+                    console.log("T " + Math.round((sep[1] / 2) * (sep[1] / 2) + 20));
+                    document.getElementById("listaT").innerHTML += "<div class=\"col\" style=\"font-size:100%; background:rgb(0," + Math.round((sep[1] / 2) * (sep[1] / 2) + 25) + ",255); \" >" + sep[1] + "°C </div>";
 
                     document.getElementById("listaT").innerHTML += "<br>";
-                    console.log(data);
+                    // console.log(data);
                 }
                 if (sep[0] == "HR") {
-                    document.getElementById("listaH").innerHTML += "<div style=\"font-size:100%; background:rgb(255, " + Math.round(sep[1] * sep[1] * 2 + 20) + ",0); \" >" + sep[1] + "</div>";
+                    console.log("Hr " + Math.round((sep[1] / 19) * (sep[1] / 19) + 20));
+                    document.getElementById("listaH").innerHTML += "<div class=\"col\" style=\"font-size:100%; background:rgb(0, " + Math.round((sep[1] / 9) * (sep[1] / 7) + 80) + ",255); \" >" + sep[1] + "</div>";
                     document.getElementById("listaH").innerHTML += "<br>";
-                    console.log(data);
+                    //console.log(data);
                 }
                 if (sep[0] == "HS") {
-
-                    document.getElementById("listaHS").innerHTML += "<div style=\"font-size:100%;  background:rgb(255, " + Math.round((sep[1] / 102.3) * (sep[1] / 102.3) + 20) + ",0); \" >" + Math.round(sep[1] / 102.3) + "</div>";
+                    console.log("HS " + Math.round((sep[1] / 102.3) * (sep[1] / 102.3) + 20));
+                    document.getElementById("listaHS").innerHTML += "<div class=\"col\" style=\"font-size:100%;  background:rgb(0, " + Math.round((sep[1] / 102.3) * (sep[1] / 102.3) + 70) + ",255); \" >" + Math.round(sep[1] / 102.3) + "</div>";
 
                     document.getElementById("listaHS").innerHTML += "<br>";
-                    console.log(data);
+                    //console.log(data);
                 }
 
             });
